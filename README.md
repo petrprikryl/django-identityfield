@@ -6,6 +6,7 @@ This reusable app provides fields that are using PostgreSQL `GENERATED { ALWAYS 
 Same as Django `AutoField`. But without `primary_key=true` limitation.
 
 ## Installation
+https://pypi.org/project/django-identityfield/
 * `uv add django-identityfield`
 * add `"identityfield"` to your `settings.INSTALLED_APPS`
 

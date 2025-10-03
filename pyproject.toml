@@ -1,7 +1,7 @@
 [project]
 name = "django-identityfield"
 version = "0.1.1"
-description = ""
+description = "Auto-incrementing fields like Django AutoField but without restrictions!"
 readme = "README.md"
 requires-python = ">=3.13"
 dependencies = [
