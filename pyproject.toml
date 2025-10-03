@@ -1,0 +1,21 @@
+[project]
+name = "django-identityfield"
+version = "0.1.0"
+description = ""
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+    "django",
+]
+
+[dependency-groups]
+dev = [
+    "django~=5.0.0",
+    "psycopg>=3.2.10",
+    "pytest>=8.4.2",
+    "pytest-django>=4.11.1",
+]
+
+[tool.pytest.ini_options]
+DJANGO_SETTINGS_MODULE = "settings"
+pythonpath = ["."]
