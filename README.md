@@ -2,12 +2,12 @@
 
 Auto-incrementing fields like Django `AutoField` but without restrictions!
 
-Library provides fields that are using PostgreSQL `GENERATED { ALWAYS | BY DEFAULT } AS IDENTITY`.
+This reusable app provides fields that are using PostgreSQL `GENERATED { ALWAYS | BY DEFAULT } AS IDENTITY`.
 Same as Django `AutoField`. But without `primary_key=true` limitation.
 
 ## Installation
-* `uv add ...`
-* add `identityfield` to your `settings.INSTALLED_APPS`
+* `uv add django-identityfield`
+* add `"identityfield"` to your `settings.INSTALLED_APPS`
 
 ## Usage
 
@@ -26,3 +26,9 @@ DB sequences are automatically created by PostgreSQL.
 And are automatically incremented on DB side.
 
 https://www.postgresql.org/docs/current/ddl-identity-columns.html
+
+## Running test suite
+
+```bash
+uv run pytest
+```
