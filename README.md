@@ -32,4 +32,5 @@ https://www.postgresql.org/docs/current/ddl-identity-columns.html
 
 ```bash
 uv run pytest
+uvx tox
 ```

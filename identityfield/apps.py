@@ -15,4 +15,4 @@ class IdentityFieldConfig(AppConfig):
 
             return super(DatabaseSchemaEditor, self)._column_generated_sql(field)
 
-        DatabaseSchemaEditor._column_generated_sql = patched__column_generated_sql
+        DatabaseSchemaEditor._column_generated_sql = patched__column_generated_sql  # ty: ignore[invalid-assignment]

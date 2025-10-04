@@ -1,7 +1,9 @@
 [project]
 name = "django-identityfield"
-version = "0.1.1"
+version = "0.1.2"
 description = "Auto-incrementing fields like Django AutoField but without restrictions!"
+license = "MIT"
+authors = [{ name = "Petr Přikryl", email = "nich@seznam.cz" }]
 readme = "README.md"
 requires-python = ">=3.13"
 dependencies = [
@@ -10,15 +12,15 @@ dependencies = [
 
 [dependency-groups]
 dev = [
-    "django~=5.0.0",
     "psycopg>=3.2.10",
     "pytest>=8.4.2",
     "pytest-django>=4.11.1",
+    "testcontainers[postgres]>=4.13.1",
 ]
 
-[tool.pytest.ini_options]
-DJANGO_SETTINGS_MODULE = "settings"
-pythonpath = ["tests"]
+[project.urls]
+Homepage = "https://github.com/petrprikryl/django-identityfield"
+Repository = "https://github.com/petrprikryl/django-identityfield"
 
 [build-system]
 requires = ["uv_build>=0.8.22,<0.9.0"]
