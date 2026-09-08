@@ -1,7 +1,9 @@
 from __future__ import annotations
 
+from typing import ClassVar
+
 import pytest
-from django.db import models, connection
+from django.db import connection, models
 
 from identityfield import IdentityField
 
@@ -10,7 +12,7 @@ class IdentityModel(models.Model):
     class Meta:
         app_label = "testapp"
 
-    objects: models.Manager[IdentityModel] = models.Manager()
+    objects: ClassVar[models.Manager[IdentityModel]] = models.Manager()
 
     sequence = IdentityField()
 

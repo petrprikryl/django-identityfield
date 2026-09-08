@@ -1,0 +1,69 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+env:
+  FORCE_COLOR: "1"
+
+jobs:
+  lint:
+    name: lint (${{ matrix.toxenv }})
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        toxenv: [ruff, ty]
+    steps:
+      - uses: actions/checkout@v7
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v10.0.1
+        with:
+          enable-cache: true
+
+      - name: Install Python
+        run: uv python install 3.13
+
+      - name: Run ${{ matrix.toxenv }}
+        run: uvx --with tox-uv tox run -e ${{ matrix.toxenv }}
+
+  test:
+    name: test (Python ${{ matrix.python }}, Django ${{ matrix.django }})
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - { toxenv: py314-django52, python: "3.14", django: "5.2" }
+          - { toxenv: py314-django60, python: "3.14", django: "6.0" }
+          - { toxenv: py314-django61, python: "3.14", django: "6.1" }
+          # - { toxenv: py315-django61, python: "3.15", django: "6.1" }
+    steps:
+      - uses: actions/checkout@v7
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v10.0.1
+        with:
+          enable-cache: true
+
+      - name: Install Python ${{ matrix.python }}
+        run: uv python install ${{ matrix.python }}
+
+      # The suite spins up a Postgres container via testcontainers; the runner
+      # ships Docker, so only the image pull needs warming up.
+      - name: Pull the Postgres image
+        run: docker pull postgres:18-alpine
+
+      - name: Run ${{ matrix.toxenv }}
+        run: uvx --with tox-uv tox run -e ${{ matrix.toxenv }}
