@@ -1,6 +1,6 @@
 [project]
 name = "django-identityfield"
-version = "0.2.0"
+version = "0.3.0"
 description = "Auto-incrementing fields like Django AutoField but without restrictions!"
 license = "MIT"
 authors = [{ name = "Petr Přikryl", email = "nich@seznam.cz" }]

@@ -1,7 +1,7 @@
 from django.apps import AppConfig
 from django.db.backends.postgresql.schema import DatabaseSchemaEditor
 
-from identityfield import IdentityMixin
+from identityfield import IdentityFieldBase
 
 
 class IdentityFieldConfig(AppConfig):
@@ -10,7 +10,7 @@ class IdentityFieldConfig(AppConfig):
     def ready(self):
         # Nasty monkey patch to override the generated clause
         def patched__column_generated_sql(self, field):
-            if isinstance(field, IdentityMixin):
+            if isinstance(field, IdentityFieldBase):
                 return field.identity_sql()
 
             return super(DatabaseSchemaEditor, self)._column_generated_sql(field)
